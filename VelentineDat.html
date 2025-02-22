@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine</title>
+  <!-- <link rel="stylesheet" href="valentine.css" /> -->
+  <style>
+    body {
+      text-align: center;
+      margin-top: 30px;
+      font-family: "Courier";
+      background-color: #e086cf;
+      color: #ae1919;
+    }
+
+    img {
+      height: 500px;
+      width: auto;
+      padding: 10px;
+    }
+
+    #valentineQuestion {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .answerButton {
+      padding: 10px 20px;
+      font-size: 30px;
+      cursor: pointer;
+      margin: 10px;
+      font-family: "courier";
+      margin-bottom: 20px;
+      background-color: #ffe3e1;
+      color: #e67373;
+      border-radius: 12px;
+      border: 2px solid #ffe3e1;
+      box-shadow: 1px 1px 2px #ff9494;
+      transition: 0.3s;
+    }
+
+    .answerButton:hover {
+      background-color: #bc2525;
+      color: #4a3596;
+      border: 2px solid #6e4242;
+      box-shadow: 1px 1px 2px #151313;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="valentineQuestion"><b>Will you be my 𝚟̶𝚊̶𝚕̶𝚎̶𝚗̶𝚝̶𝚒̶𝚗̶𝚎̶ wife?</b></div>
+  <button class="answerButton" onclick="location.href='thankyou.html'">
+    Yes
+  </button>
+  <button class="answerButton" id="noButton">No, Never</button>
+  <br />
+  <img src="cat.gif" alt="cat asking question" class="responsive" />
+
+  <script>
+    document
+      .getElementById("noButton")
+      .addEventListener("click", function () {
+        var yesButton = document.querySelector(
+          'button[onclick*="thankyou.html"]'
+        );
+        var currentFontSize = parseInt(
+          window.getComputedStyle(yesButton).fontSize
+        );
+        yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
+      });
+  </script>
+</body>
+
+</html>

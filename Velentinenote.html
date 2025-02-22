@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MayuJay</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>
+    h1,
+    p {
+      font-family: cursive, sans-serif;
+    }
+
+    p {
+      text-indent: 50px;
+      padding: 5px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    h1,
+    h2 {
+      font-weight: 800;
+      color: rgb(255, 0, 0);
+      text-shadow: 0 0 10px white;
+    }
+
+    body {
+      margin: 0px;
+      background: url(https://i.postimg.cc/5tgNs0n9/couple-sunset-city-scenery-art-uhdpaper-com-4-K-8-264.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      /* transiton: transform 2s; */
+      z-index: 1;
+    }
+
+    .heart>img {
+      width: 80px;
+      height: auto;
+    }
+
+    p {
+      font-size: 22px;
+    }
+
+    .message {
+      padding: 20px;
+      background-color: #eeeeee95;
+      min-width: 400px;
+      height: 70%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      overflow: hidden;
+      animation-name: openmsg;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-play-state: paused;
+      animation-fill-mode: forwards;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+      border-radius: 5px;
+    }
+
+    .heart>img:hover {
+      animation-name: beat;
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
+    }
+
+    @keyframes beat {
+      0% {
+        width: 80px;
+      }
+
+      25% {
+        width: 88px;
+      }
+
+      30% {
+        width: 80px;
+      }
+
+      50% {
+        width: 70px;
+      }
+
+      60% {
+        width: 80px;
+      }
+
+      75% {
+        width: 88px;
+      }
+
+      100% {
+        width: 80px;
+      }
+    }
+
+    @keyframes openmsg {
+      0% {
+        height: 0px;
+        padding: 0px 20px;
+      }
+
+      100% {
+        height: 75%;
+        padding: 20px 20px;
+      }
+    }
+
+    @keyframes heartMove {
+      0% {
+        top: 50%;
+      }
+
+      100% {
+        top: 85%;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .openNor {
+      animation-direction: normal;
+      animation-play-state: running;
+    }
+
+    .closeNor {
+      animation-direction: reverse;
+      animation-play-state: running;
+    }
+
+    .no-anim {
+      animation: none;
+    }
+
+    .closed {
+      height: 0px;
+      padding: 0px 20px;
+    }
+
+    .bottom {
+      bottom: 5px;
+    }
+
+    .openHer {
+      animation-name: heartMove;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-play-state: running;
+      animation-fill-mode: forwards;
+    }
+
+    .closeHer {
+      animation-name: heartMove;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-play-state: running;
+      animation-direction: reverse;
+      animation-fill-mode: forwards;
+    }
+
+    .beating>img {
+      animation-name: beat;
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
+    }
+
+    .openedHer {
+      top: 85%;
+      transform: translate(-50%, 0);
+    }
+
+    .main {
+      color: red;
+      font-weight: 700;
+    }
+
+    .back {
+      position: absolute;
+      bottom: 3%;
+      left: 10%;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 10px rgb(0, 0, 0);
+    }
+
+    .open-page-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #e17171;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .open-page-button:hover {
+            background-color: #d06060;
+        }
+
+    @media (min-width: 300px) and (max-width: 600px) {
+      p {
+        font-size: 14px;
+      }
+
+      h1 {
+        padding-left: 10px;
+        font-size: 22px;
+
+      }
+
+      h2 {
+        padding-left: 10px;
+        font-size: 14px;
+
+      }
+
+      /* .message {
+        height: 70%;
+        top: 46%;
+        min-width: 260px;
+      } */
+
+      .back {
+        font-size: 13px;
+        left: 1px;
+        /* z-index: 0; */
+      }
+
+      .closed {
+        height: 0px;
+        padding: 0px 20px;
+      }
+
+      .no-anim {
+        animation: none;
+      }
+
+      .message {
+        background-color: #eeeeee95;
+        min-width: 250px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        border-radius: 5px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1000px) {
+      p {
+        font-size: 18px;
+      }
+
+      h1 {
+        padding-left: 10px;
+        font-size: 30px;
+
+      }
+
+      h2 {
+        padding-left: 10px;
+        font-size: 22px;
+
+      }
+
+      /* .message {
+        min-width: 440px;
+        height: 70%;
+        top: 46%;
+      } */
+
+      .back {
+        font-size: 15px;
+        left: 40px;
+        /* z-index: 0; */
+      }
+
+      .closed {
+        height: 0px;
+        padding: 0px 20px;
+      }
+
+      .no-anim {
+        animation: none;
+      }
+
+      .message {
+        background-color: #eeeeee95;
+        min-width: 450px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        border-radius: 5px;
+      }
+    }
+
+
+    /* @media (max-width: 580px) {
+  p {
+    font-size: 17px;
+  }
+} */
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <label>
+      <div class="heart">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Love_Heart_SVG.svg"></img>
+      </div>
+      <input id="messageState" type="checkbox" style="display:none" />
+    </label>
+    <div class="message">
+      <h1>My Dearest Bubu,</h1>
+      <h2>Happy Valentine's Day, my love! ❤️</h2>
+      <p>Even though miles separate us, my heart is always with you. Every morning, your sweet "good morning" message is
+        the first light of my day, a reminder that love knows no distance. I cherish every word, every call, every
+        little moment we share, and I long for the day when I can hold you close instead of just dreaming about it.
+
+        You are my happiness, my peace, my forever. No matter how far apart we are, my love for you only grows stronger.
+        One day, Bubu, we won’t count the miles between us—we'll just count the endless moments together. Until then, I
+        promise to love you with all my heart, every second, every breath, every heartbeat.</p>
+
+      <p><span class="main">Your DUDU</span>
+      </p>
+    </div>
+    <p class="back">Click On Heart To See Magic</p>
+
+    <!-- Audio element for background music -->
+    <audio id="background-music" autoplay loop>
+      <source src="VeleSong2.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+  </audio>
+
+  </div>
+
+  <button class="open-page-button" onclick="openNewPage()">Next</button>
+
+
+  <!-- <script src="main.js"></script> -->
+  <script>
+    $("#messageState").on("change", (x) => {
+      $(".message").removeClass("openNor").removeClass("closeNor");
+      if ($("#messageState").is(":checked")) {
+        $(".message")
+          .removeClass("closed")
+          .removeClass("no-anim")
+          .addClass("openNor");
+        $(".heart")
+          .removeClass("closeHer")
+          .removeClass("openedHer")
+          .addClass("openHer");
+        $(".container").stop().animate({ backgroundColor: "#f48fb1" }, 2000);
+        console.log("Abrindo");
+      } else {
+        $(".message").removeClass("no-anim").addClass("closeNor");
+        $(".heart")
+          .removeClass("openHer")
+          .removeClass("openedHer")
+          .addClass("closeHer");
+        $(".container").stop().animate({ backgroundColor: "#fce4ec" }, 2000);
+        console.log("fechando");
+      }
+    });
+
+    $(".message").on(
+      "webkitAnimationEnd oanimationend msAnimationEnd animationend",
+      function (e) {
+        console.log("Animation End");
+        if ($(".message").hasClass("closeNor")) $(".message").addClass("closed");
+        $(".message")
+          .removeClass("openNor")
+          .removeClass("closeNor")
+          .addClass("no-anim");
+      }
+    );
+
+    $(".heart").on(
+      "webkitAnimationEnd oanimationend msAnimationEnd animationend",
+      function (e) {
+        console.log("Animation End");
+        if (!$(".heart").hasClass("closeHer"))
+          $(".heart").addClass("openedHer").addClass("beating");
+        else $(".heart").addClass("no-anim").removeClass("beating");
+        $(".heart").removeClass("openHer").removeClass("closeHer");
+      }
+    );
+
+    function openNewPage() {
+            window.location.href = 'bookcover.html';
+        }
+
+        document.addEventListener("click", () => {
+            audio.play().catch(() => {
+                console.log("Autoplay was blocked. Please interact with the page to play the music.");
+            });
+        });
+
+  </script>
+</body>
+
+</html>

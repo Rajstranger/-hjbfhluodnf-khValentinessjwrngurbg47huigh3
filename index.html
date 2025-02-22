@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key and Lock Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .triangle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 1s ease-in-out;
+    }
+
+    .triangle:nth-child(1) {
+      background: rgb(3,73,80);
+      background: -moz-linear-gradient(0deg, rgba(3,73,80,1) 20%, rgba(0,198,255,1) 100%);
+      background: -webkit-linear-gradient(0deg, rgba(3,73,80,1) 20%, rgba(0,198,255,1) 100%);
+      background: linear-gradient(0deg, rgba(3,73,80,1) 20%, rgba(0,198,255,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#034950",endColorstr="#00c6ff",GradientType=1);
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+    }
+
+    .triangle:nth-child(2) {
+      background: rgb(80,42,3);
+      background: -moz-linear-gradient(90deg, rgba(80,42,3,1) 20%, rgba(255,123,0,1) 100%);
+      background: -webkit-linear-gradient(90deg, rgba(80,42,3,1) 20%, rgba(255,123,0,1) 100%);
+      background: linear-gradient(90deg, rgba(80,42,3,1) 20%, rgba(255,123,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#502a03",endColorstr="#ff7b00",GradientType=1);
+      clip-path: polygon(50% 50%, 100% 0%, 100% 100%);
+    }
+
+    .triangle:nth-child(3) {
+      background: rgb(73,3,80);
+      background: -moz-linear-gradient(180deg, rgba(73,3,80,1) 20%, rgba(243,0,255,1) 100%);
+      background: -webkit-linear-gradient(180deg, rgba(73,3,80,1) 20%, rgba(243,0,255,1) 100%);
+      background: linear-gradient(180deg, rgba(73,3,80,1) 20%, rgba(243,0,255,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#490350",endColorstr="#f300ff",GradientType=1);
+      clip-path: polygon(50% 50%, 100% 100%, 0% 100%);
+    }
+
+    .triangle:nth-child(4) {
+      background: rgb(80,57,3);
+      background: -moz-linear-gradient(270deg, rgb(42, 80, 3) 20%, rgb(145, 255, 0) 100%);
+      background: -webkit-linear-gradient(270deg, rgb(60, 80, 3) 20%, rgb(217, 255, 0) 100%);
+      background: linear-gradient(270deg, rgb(48, 80, 3) 20%, rgb(174, 255, 0) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#503903",endColorstr="#ffd100",GradientType=1);
+      clip-path: polygon(50% 50%, 0% 100%, 0% 0%);
+    }
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      background-color: rgba(9, 187, 33, 0);
+      border-radius: 50%;
+      transition: border-color 0.5s ease;
+      cursor: pointer;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px; /* Adjusted for smaller screens */
+      border: 3px solid transparent;
+    }
+
+    .key {
+      position: absolute;
+      font-size: 30px;
+      cursor: grab;
+      user-select: none;
+      display: none; /* Initially hidden */
+      transition: transform 1s ease-in-out; /* Smooth transition for transform */
+    }
+
+    .triangle:nth-child(1) .circle {
+      top: 20%;
+      left: 50%;
+    }
+
+    .triangle:nth-child(2) .circle {
+      top: 50%;
+      right: 15%;
+    }
+
+    .triangle:nth-child(3) .circle {
+      bottom: 20%;
+      left: 50%;
+    }
+
+    .triangle:nth-child(4) .circle {
+      top: 50%;
+      left: 15%;
+    }
+
+    .triangle.roll-off-top {
+      transform: translateY(-100%);
+    }
+
+    .triangle.roll-off-right {
+      transform: translateX(100%);
+    }
+
+    .triangle.roll-off-bottom {
+      transform: translateY(100%);
+    }
+
+    .triangle.roll-off-left {
+      transform: translateX(-100%);
+    }
+
+    /* Password input styling */
+    .password-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .password-container input {
+      padding: 10px;
+      font-size: 15px;
+      border: 2px solid black; /* Default black border */
+      border-radius: 15px;
+      width: 100px;
+      transition: border-color 0.3s ease;
+    }
+
+    .password-container input.incorrect {
+      border-color: red; /* Red border for incorrect password */
+    }
+
+    .password-container input.correct {
+      border-color: green; /* Green border for correct password */
+    }
+
+    .password-container.fade-out {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.9);
+    }
+
+    /* Heart styling */
+    .heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      color: red;
+      opacity: 0;
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      pointer-events: none; /* Initially disable clicks */
+      cursor: pointer; /* Show pointer cursor when clickable */
+    }
+
+    .heart.show {
+      opacity: 1;
+      pointer-events: auto; /* Enable clicks when visible */
+    }
+
+    .heart.drop {
+      transform: translate(-50%, 150vh); /* Move heart off the screen */
+    }
+
+    .key.drop {
+      transform: translateY(150vh); /* Move keys off the screen */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .circle {
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+      }
+
+      .key {
+        font-size: 25px;
+      }
+
+      .heart {
+        font-size: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .circle {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+      }
+
+      .key {
+        font-size: 20px;
+      }
+
+      .heart {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="background">
+      <div class="triangle">
+        <div class="circle" data-lock="lock1">🔒</div>
+      </div>
+      <div class="triangle">
+        <div class="circle" data-lock="lock2">🔒</div>
+      </div>
+      <div class="triangle">
+        <div class="circle" data-lock="lock3">🔒</div>
+      </div>
+      <div class="triangle">
+        <div class="circle" data-lock="lock4">🔒</div>
+      </div>
+    </div>
+
+    <!-- Password input field -->
+    <div class="password-container">
+      <input type="password" id="password" placeholder="Enter code">
+    </div>
+
+    <!-- Heart element -->
+    <div class="heart">❤️</div>
+  </div>
+
+  <script>
+    // Function to generate random positions
+    function getRandomPosition() {
+      const x = Math.random() * (window.innerWidth - 50); // Subtract 50 to keep keys within viewport
+      const y = Math.random() * (window.innerHeight - 50);
+      return { x, y };
+    }
+
+    // Function to create a draggable key
+    function createKey(lockName) {
+      const key = document.createElement('div');
+      key.classList.add('key');
+      key.textContent = '🔑'; // Simple key icon without numbers
+      key.dataset.key = lockName; // Store the corresponding lock name in a data attribute
+      const position = getRandomPosition();
+      key.style.left = `${position.x}px`;
+      key.style.top = `${position.y}px`;
+      document.body.appendChild(key);
+
+      // Make the key draggable
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      const startDrag = (clientX, clientY) => {
+        isDragging = true;
+        offsetX = clientX - key.getBoundingClientRect().left;
+        offsetY = clientY - key.getBoundingClientRect().top;
+        key.style.cursor = 'grabbing';
+      };
+
+      const drag = (clientX, clientY) => {
+        if (isDragging) {
+          const x = clientX - offsetX;
+          const y = clientY - offsetY;
+          key.style.left = `${x}px`;
+          key.style.top = `${y}px`;
+
+          // Check for lock response while dragging
+          checkKeyMatch(key);
+        }
+      };
+
+      const endDrag = () => {
+        isDragging = false;
+        key.style.cursor = 'grab';
+      };
+
+      // Mouse events
+      key.addEventListener('mousedown', (e) => startDrag(e.clientX, e.clientY));
+      document.addEventListener('mousemove', (e) => drag(e.clientX, e.clientY));
+      document.addEventListener('mouseup', endDrag);
+
+      // Touch events
+      key.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+      });
+      document.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        drag(touch.clientX, touch.clientY);
+      });
+      document.addEventListener('touchend', endDrag);
+    }
+
+    // Function to check if a key matches any lock
+    let matchedCount = 0; // Counter for matched keys
+    function checkKeyMatch(key) {
+      const locks = document.querySelectorAll('.circle');
+      let allMatched = true;
+
+      locks.forEach(lock => {
+        const keyRect = key.getBoundingClientRect();
+        const lockRect = lock.getBoundingClientRect();
+
+        // Check if the key is directly on top of the lock
+        if (
+          keyRect.left < lockRect.right &&
+          keyRect.right > lockRect.left &&
+          keyRect.top < lockRect.bottom &&
+          keyRect.bottom > lockRect.top
+        ) {
+          if (lock.dataset.lock === key.dataset.key) {
+            lock.style.borderColor = 'green'; // Match: green border
+            if (!lock.dataset.matched) {
+              lock.dataset.matched = true; // Mark the lock as matched
+              matchedCount++; // Increment the matched count
+            }
+          } else {
+            lock.style.borderColor = 'red'; // No match: red border
+            allMatched = false;
+          }
+        } else {
+          lock.style.borderColor = 'transparent'; // Reset if key is not on top
+          allMatched = false;
+        }
+      });
+
+      // If all keys are matched, show the heart
+      if (matchedCount === 4) {
+        const heart = document.querySelector('.heart');
+        heart.classList.add('show'); // Show the heart
+
+        // Add click event listener to the heart
+        heart.addEventListener('click', () => {
+          rollOffTriangles();
+        });
+
+        // Add touch event listener to the heart
+        heart.addEventListener('touchend', () => {
+          rollOffTriangles();
+        });
+      }
+    }
+
+    // Function to validate the password in real-time
+    function validatePassword() {
+      const passwordInput = document.getElementById('password');
+      const passwordContainer = document.querySelector('.password-container');
+      const keys = document.querySelectorAll('.key');
+
+      if (passwordInput.value === 'Rajloveheng') {
+        // Correct password: green border, show keys, and animate out password field
+        passwordInput.classList.remove('incorrect');
+        passwordInput.classList.add('correct');
+        passwordContainer.classList.add('fade-out');
+
+        // Show all keys after animation
+        setTimeout(() => {
+          keys.forEach(key => {
+            key.style.display = 'block';
+          });
+          passwordContainer.remove(); // Remove password field after animation
+        }, 500); // Match the duration of the fade-out animation
+      } else {
+        // Incorrect password: red border
+        passwordInput.classList.remove('correct');
+        passwordInput.classList.add('incorrect');
+      }
+    }
+
+    // Function to roll off triangles and keys one by one
+    function rollOffTriangles() {
+      const triangles = document.querySelectorAll('.triangle');
+
+      triangles.forEach((triangle, index) => {
+        setTimeout(() => {
+          triangle.classList.add(`roll-off-${['bottom', 'left', 'top', 'right'][index]}`);
+        }, index * 500); // Delay each animation by 500ms
+      });
+
+      // After triangles have moved out, drop keys and heart
+      setTimeout(() => {
+        const keys = document.querySelectorAll('.key');
+        const heart = document.querySelector('.heart');
+
+        // Drop keys
+        keys.forEach(key => {
+          key.classList.add('drop');
+        });
+
+        // Drop heart
+        heart.classList.add('drop');
+
+        // Redirect to a new HTML file after all animations finish
+        setTimeout(() => {
+          window.location.href = 'PaoerPropose.html'; // Replace with your new HTML file
+        }, 1000); // Wait for drop animations to finish
+      }, triangles.length * 500 + 1000); // Wait for triangles to move out
+    }
+
+    // Create 4 keys and assign them to their corresponding locks
+    createKey('lock1');
+    createKey('lock2');
+    createKey('lock3');
+    createKey('lock4');
+
+    // Add event listener to password input for real-time validation
+    const passwordInput = document.getElementById('password');
+    passwordInput.addEventListener('input', validatePassword);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Questionnaire</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2575fc;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question p {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            padding: 10px;
+            background: #f4f4f9;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .options label:hover {
+            background: #e0e0f0;
+            transform: translateX(5px);
+        }
+
+        .options input[type="radio"],
+        .options input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 97%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .range-slider {
+            width: 90%;
+            margin-top: 10px;
+        }
+
+        .range-slider-value {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2575fc;
+            margin-top: 10px;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-button:hover {
+            background: #1a5bbf;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Interactive Questionnaire</h1>
+
+        <!-- Multiple Choice Question -->
+
+        <div class="question">
+            <p>1. What is your name</p>
+            <input type="text" id="yourname" placeholder="Enter your name">
+        </div>
+
+        <!-- Text Input Question -->
+        <div class="question">
+            <p>2. What is my full name</p>
+            <input type="text" id="myname" placeholder="Enter my full name">
+        </div>
+
+        <!-- -------------------------------------- -->
+
+        <!-- Date Picker Question -->
+        <div class="question">
+            <p>3. What is my birthdate?</p>
+            <input type="date" id="birthdate">
+        </div>
+
+        <!-- -------------------------------------- -->
+
+        <!-- Range Slider Question -->
+        <div class="question">
+            <p>4. On a scale of 1 to 10, rate the following:</p> <br>
+
+            <!-- Slider for "How much do you enjoy programming?" -->
+            <div class="slider-container">
+                <label for="looks">How much you rate my overall looks?</label>
+                <input type="range" id="looks" min="1" max="10" value="5" class="range-slider">
+                <span id="looks-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="hair">Rate my hair:</label>
+                <input type="range" id="hair" min="1" max="10" value="5" class="range-slider">
+                <span id="hair-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="Eyes">Rate my Eyes:</label>
+                <input type="range" id="Eyes" min="1" max="10" value="5" class="range-slider">
+                <span id="eyes-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="dress">Rate my dressing sense:</label>
+                <input type="range" id="dress" min="1" max="10" value="5" class="range-slider">
+                <span id="dress-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="body">Rate my body:</label>
+                <input type="range" id="body" min="1" max="10" value="5" class="range-slider">
+                <span id="body-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="voice">Rate my voice:</label>
+                <input type="range" id="voice" min="1" max="10" value="5" class="range-slider">
+                <span id="voice-value">5</span>
+            </div>
+
+            <div class="slider-container">
+                <label for="behavior">Rate my Behavior/nature:</label>
+                <input type="range" id="behavior" min="1" max="10" value="5" class="range-slider">
+                <span id="behavior-value">5</span>
+            </div>
+
+        </div>
+
+        <div class="question">
+            <p>5. How minimum a man should earm monthly salary to become your husband:</p> <br>
+
+            <!-- Slider for "How much do you enjoy programming?" -->
+            <div class="slider-container">
+                <label for="salary">Choose minimum salary your husband should earn monthly from 300$ to 1200$</label>
+                <input type="range" id="salary" min="500" max="1400" value="1000" class="range-slider">
+                <span id="salary-value">1000</span>
+            </div>
+
+        </div>
+
+        <!-- -------------------------------------- -->
+
+
+        <!-- Dropdown Menu Question -->
+        <div class="question">
+            <p>6. Order the priorities among family, love, career, money, and friends? (Select one by one by
+                priorities 1 to 5)</p>
+
+            <!-- Priority 1 -->
+            <label for="priority1">1.</label>
+            <select id="priority1" class="priority-dropdown">
+                <option value="">Select</option>
+                <option value="family">Family</option>
+                <option value="love">Love</option>
+                <option value="career">Career</option>
+                <option value="money">Money</option>
+                <option value="friends">Friends</option>
+            </select>
+
+            <!-- Priority 2 -->
+            <label for="priority2">2.</label>
+            <select id="priority2" class="priority-dropdown">
+                <option value="">Select</option>
+                <option value="family">Family</option>
+                <option value="love">Love</option>
+                <option value="career">Career</option>
+                <option value="money">Money</option>
+                <option value="friends">Friends</option>
+            </select>
+
+            <!-- Priority 3 -->
+            <label for="priority3">3.</label>
+            <select id="priority3" class="priority-dropdown">
+                <option value="">Select</option>
+                <option value="family">Family</option>
+                <option value="love">Love</option>
+                <option value="career">Career</option>
+                <option value="money">Money</option>
+                <option value="friends">Friends</option>
+            </select>
+
+            <!-- Priority 4 -->
+            <label for="priority4">4.</label>
+            <select id="priority4" class="priority-dropdown">
+                <option value="">Select</option>
+                <option value="family">Family</option>
+                <option value="love">Love</option>
+                <option value="career">Career</option>
+                <option value="money">Money</option>
+                <option value="friends">Friends</option>
+            </select>
+
+            <!-- Priority 5 -->
+            <label for="priority5">5.</label>
+            <select id="priority5" class="priority-dropdown">
+                <option value="">Select</option>
+                <option value="family">Family</option>
+                <option value="love">Love</option>
+                <option value="career">Career</option>
+                <option value="money">Money</option>
+                <option value="friends">Friends</option>
+            </select>
+        </div>
+
+        <!-- -------------------------------------- -->
+
+
+        <div class="question">
+            <p>7. If your family not ready to accept me, would you still choose me againts your family?</p>
+            <div class="options">
+                <label><input type="radio" name="acceptme" value="yes"> Yes</label>
+                <label><input type="radio" name="acceptme" value="no"> No</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>8. If you know that i am cheating on you and after some time i come again in your life, will you accecpt
+                me or not??</p>
+            <div class="options">
+                <label><input type="radio" name="cheatonher" value="yes"> Yes</label>
+                <label><input type="radio" name="cheatonher" value="no"> No</label>
+            </div>
+        </div>
+
+        <!-- -------------------------------------- -->
+
+
+        <div class="question">
+            <p>9. which one you chooose</p>
+            <div class="options">
+                <label><input type="radio" name="cheathusb" value="nosex"> Husband who love other girl more then you but
+                    not had sex with her</label>
+                <label><input type="radio" name="cheathusb" value="hadsex"> Husband who love you only but had sex with
+                    other girl because you not make him happy</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>10. which one you chooose</p>
+            <div class="options">
+                <label><input type="radio" name="aloncheat" value="livealone"> live alone forever</label>
+                <label><input type="radio" name="aloncheat" value="staycheter"> Stay with a cheater</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>11. which one you chooose</p>
+            <div class="options">
+                <label><input type="radio" name="pastfuture" value="Seefuture"> See the future</label>
+                <label><input type="radio" name="pastfuture" value="changepast?"> Change the past?</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>12. which one you chooose</p>
+            <div class="options">
+                <label><input type="radio" name="bedroom" value="notouch"> Sleep together but can't do anything</label>
+                <label><input type="radio" name="bedroom" value="touchhim"> sleep diffrent place but can do
+                    anyhting</label>
+            </div>
+        </div>
+
+        <!-- 44. Would you rather have your partner talk dirty in your ear or send dirty texts? -->
+
+        <!-- -------------------------------------- -->
+
+        <div class="question">
+            <p>13. What you want me to call you more?</p>
+            <div class="options">
+                <label><input type="radio" name="callYou" value="Heng"> Heng</label>
+                <label><input type="radio" name="callYou" value="Bubu"> Bubu</label>
+                <label><input type="radio" name="callYou" value="Beby girl"> Beby girl</label>
+                <label><input type="radio" name="callYou" value="Wifey"> Wifey</label>
+                <label><input type="radio" name="callYou" value="Pookie"> Pookie</label>
+
+            </div>
+        </div>
+
+        <div class="question">
+            <p>14. What side of me scares you the most?</p>
+            <div class="options">
+                <label><input type="radio" name="scareyou" value="Anger"> Anger</label>
+                <label><input type="radio" name="scareyou" value="shout"> Shout</label>
+                <label><input type="radio" name="scareyou" value="Cheating"> Cheating</label>
+                <label><input type="radio" name="scareyou" value="corrupt"> Corrupt</label>
+                <label><input type="radio" name="scareyou" value="notcomecambodia"> I will not come cambodia</label>
+
+            </div>
+        </div>
+
+        <div class="question">
+            <p>15. Where you want me to touch you first among all the options?</p>
+            <div class="options">
+                <label><input type="radio" name="touchher" value="neck"> Neck</label>
+                <label><input type="radio" name="touchher" value="lowerback"> Lower back</label>
+                <label><input type="radio" name="touchher" value="waist"> Waist</label>
+                <label><input type="radio" name="touchher" value="thighs"> Thighs</label>
+
+            </div>
+        </div>
+
+        <div class="question">
+            <p>16. Who I am for you, answer honestly, don't be so sweet:?</p>
+            <div class="options">
+                <label><input type="radio" name="whoAm" value="Friend"> Friend</label>
+                <label><input type="radio" name="whoAm" value="BestFriend"> Best Friend</label>
+                <label><input type="radio" name="whoAm" value="BoyFriend"> Boy Friend</label>
+                <label><input type="radio" name="whoAm" value="Husband"> Husband</label>
+                <label><input type="radio" name="whoAm" value="FriendBenefits"> Friend with Benefits</label>
+                <label><input type="radio" name="whoAm" value="BoyBestHusb"> Friend who can be husband and
+                    BoyFriend</label>
+
+            </div>
+        </div>
+
+        <div class="question">
+            <p>17. What is one things that you want to remove from me?</p>
+            <div class="options">
+                <label><input type="radio" name="removethings" value="Loudshout"> Loud/shout voice</label>
+                <label><input type="radio" name="removethings" value="blockunfollow"> Block/unfollow others</label>
+                <label><input type="radio" name="removethings" value="beardmoustache"> beard and moustache</label>
+                <label><input type="radio" name="removethings" value="corrupt"> Corrupted</label>
+                <label><input type="radio" name="removethings" value="ignore"> Ignore after fight</label>
+                <label><input type="radio" name="removethings" value="likecmt"> Like and follow other girls</label>
+            </div>
+
+        </div>
+
+        <!-- -------------------------------------- -->
+
+        <script>
+            // Function to update dropdowns when an option is selected
+            function updateDropdowns() {
+                const dropdowns = document.querySelectorAll('.priority-dropdown');
+
+                dropdowns.forEach(dropdown => {
+                    dropdown.addEventListener('change', function () {
+                        const selectedValue = this.value;
+
+                        // If a valid option is selected, remove it from other dropdowns
+                        if (selectedValue) {
+                            dropdowns.forEach(otherDropdown => {
+                                if (otherDropdown !== this) {
+                                    Array.from(otherDropdown.options).forEach(option => {
+                                        if (option.value === selectedValue) {
+                                            option.remove(); // Remove the option from the dropdown
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Call the function to initialize the dropdown behavior
+            updateDropdowns();
+        </script>
+
+
+
+        <!-- Checkbox (Multiple Answers) Question -->
+        <div class="question">
+            <p>18. Which two of my personality you like the most from the following option? (Select any 2 from
+                the option)</p>
+            <div class="options">
+                <label><input type="checkbox" name="personality" value="jealous"> Jealous </label>
+                <label><input type="checkbox" name="personality" value="funny"> Funny</label>
+                <label><input type="checkbox" name="personality" value="corrupted"> Corrupted </label>
+                <label><input type="checkbox" name="personality" value="angry"> Angry</label>
+                <label><input type="checkbox" name="personality" value="romantic"> Pookie </label>
+            </div>
+        </div>
+
+        <script>
+            // Get all checkboxes with the name "personality"
+            const checkboxes = document.querySelectorAll('input[name="personality"]');
+
+            // Add event listener to each checkbox
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    // Count the number of checked checkboxes
+                    const checkedCount = document.querySelectorAll('input[name="personality"]:checked').length;
+
+                    // If 2 checkboxes are checked, disable the rest
+                    if (checkedCount === 2) {
+                        checkboxes.forEach(cb => {
+                            if (!cb.checked) {
+                                cb.disabled = true; // Disable unchecked checkboxes
+                            }
+                        });
+                    } else {
+                        // Re-enable checkboxes if fewer than 2 are checked
+                        checkboxes.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <div class="question">
+            <p>19. Which two of my personality you want me to show you more from the following option? (Select
+                any 2 from the option)</p>
+            <div class="options">
+                <label><input type="checkbox" name="personality2" value="jealous"> Jealous </label>
+                <label><input type="checkbox" name="personality2" value="funny"> Funny</label>
+                <label><input type="checkbox" name="personality2" value="corrupted"> Corrupted </label>
+                <label><input type="checkbox" name="personality2" value="angry"> Angry</label>
+                <label><input type="checkbox" name="personality2" value="romantic"> Romantic </label>
+            </div>
+        </div>
+
+        <script>
+            // Get all checkboxes with the name "personality2"
+            const checkboxes2 = document.querySelectorAll('input[name="personality2"]');
+
+            // Add event listener to each checkbox
+            checkboxes2.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    // Count the number of checked checkboxes
+                    const checkedCount2 = document.querySelectorAll('input[name="personality2"]:checked').length;
+
+                    // If 2 checkboxes are checked, disable the rest
+                    if (checkedCount2 === 2) {
+                        checkboxes2.forEach(cb => {
+                            if (!cb.checked) {
+                                cb.disabled = true; // Disable unchecked checkboxes
+                            }
+                        });
+                    } else {
+                        // Re-enable checkboxes if fewer than 2 are checked
+                        checkboxes2.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <div class="question">
+            <p>20. If i can read your mind, what would be your peronality i know about you? (Select
+                any 2 from the option)</p>
+            <div class="options">
+                <label><input type="checkbox" name="readmind" value="goodgirl"> Good girl </label>
+                <label><input type="checkbox" name="readmind" value="badgirl"> Naughty girl</label>
+                <label><input type="checkbox" name="readmind" value="innocentgirl"> Innocent girl </label>
+                <label><input type="checkbox" name="readmind" value="dumbgirl"> Stupid/dumb girl</label>
+                <label><input type="checkbox" name="readmind" value="naughtgirl"> Naughty for one man </label>
+                <label><input type="checkbox" name="readmind" value="Lovergirl"> Lover girl </label>
+
+            </div>
+        </div>
+
+        <script>
+            // Get all checkboxes with the name "personality2"
+            const checkboxes3 = document.querySelectorAll('input[name="readmind"]');
+
+            // Add event listener to each checkbox
+            checkboxes3.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    // Count the number of checked checkboxes
+                    const checkedCount3 = document.querySelectorAll('input[name="readmind"]:checked').length;
+
+                    // If 2 checkboxes are checked, disable the rest
+                    if (checkedCount3 === 2) {
+                        checkboxes3.forEach(cb => {
+                            if (!cb.checked) {
+                                cb.disabled = true; // Disable unchecked checkboxes
+                            }
+                        });
+                    } else {
+                        // Re-enable checkboxes if fewer than 2 are checked
+                        checkboxes3.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <div class="question">
+            <p>21. Which 2 kiss you really want me to do with you(Select
+                any 3 from the option)</p>
+            <div class="options">
+                <label><input type="checkbox" name="Kissher" value="Neckkiss"> Neck kiss</label>
+                <label><input type="checkbox" name="Kissher" value="Backkiss"> Back kiss</label>
+                <label><input type="checkbox" name="Kissher" value="Shoulderkiss"> Shoulder kiss </label>
+                <label><input type="checkbox" name="Kissher" value="Lipkiss"> Lip kiss</label>
+                <label><input type="checkbox" name="Kissher" value="waistkiss"> waist kiss </label>
+                <label><input type="checkbox" name="Kissher" value="OtherKiss"> Any Other Kiss </label>
+
+            </div>
+        </div>
+
+        <script>
+            // Get all checkboxes with the name "personality2"
+            const checkboxes4 = document.querySelectorAll('input[name="Kissher"]');
+
+            // Add event listener to each checkbox
+            checkboxes4.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    // Count the number of checked checkboxes
+                    const checkedCount4 = document.querySelectorAll('input[name="Kissher"]:checked').length;
+
+                    // If 2 checkboxes are checked, disable the rest
+                    if (checkedCount4 === 3) {
+                        checkboxes4.forEach(cb => {
+                            if (!cb.checked) {
+                                cb.disabled = true; // Disable unchecked checkboxes
+                            }
+                        });
+                    } else {
+                        // Re-enable checkboxes if fewer than 2 are checked
+                        checkboxes4.forEach(cb => {
+                            cb.disabled = false;
+                        });
+                    }
+                });
+            });
+        </script>
+
+        <!-- -------------------------------------- -->
+
+        <div class="question">
+            <p>22. If we not together in future, what is one thinsg you still remember and miss about me?</p>
+            <input type="text" id="missaboutme" placeholder="What you miss about me..">
+        </div>
+
+        <div class="question">
+            <p>23. What is the most frustrating/Annoying part of my personality?</p>
+            <input type="text" id="Annoyingme" placeholder="whats make you dislike about me...">
+        </div>
+
+        <div class="question">
+            <p>24. What is one thing about me that you feel you are lucky having me in your life?</p>
+            <input type="text" id="luckyyou" placeholder="whats make you lucky about me...">
+        </div>
+
+        <div class="question">
+            <p>25. What is one thing that you think we/I need to improve in our releationship?</p>
+            <input type="text" id="improve" placeholder="whats you want I need to improve...">
+        </div>
+
+        <div class="question">
+            <p>26. What is one thing that you insecure about me?</p>
+            <input type="text" id="insecure" placeholder="What is that one things that you insecure about me...">
+        </div>
+
+        <div class="question">
+            <p>27. Whats the weiredest things i ever do that made you fall in love with me more?</p>
+            <input type="text" id="weiredestthings" placeholder="write down that weired things about me">
+        </div>
+
+        <div class="question">
+            <p>28. What's the one things you really want to know about me?</p>
+            <input type="text" id="onethings" placeholder="What you want to know about me?">
+        </div>
+
+
+        <div class="question">
+            <p>29. What is a part of me you never want to change(can be anything like behavior, bodypart,dress,
+                feeling or anything...)?</p>
+            <input type="text" id="neverchnage" placeholder="Write down that that you don't want to chnage about me">
+        </div>
+
+        <div class="question">
+            <p>30. If you have to choose any one body part of my body which one you choose and why?</p>
+            <input type="text" id="bodypart" placeholder="Which body part you choose">
+        </div>
+
+        <div class="question">
+            <p>31. When was the first time you really want to kiss me? (Sepcify time, or what we are talking about that
+                time)?</p>
+            <input type="text" id="firstkiss" placeholder="when you first time want to kiss me..">
+        </div>
+
+        <div class="question">
+            <p>32. What is something that you want from me but afraid to ask me?</p>
+            <input type="text" id="afraidtoask"
+                placeholder="Write down that thing you want from be but can not ask directly">
+        </div>
+
+        <div class="question">
+            <p>33. Name one things that you want me to do that i never did, anything you can ask, dont be scared?
+            </p>
+            <input type="text" id="thingswant" placeholder="Write that one thing that you want me to do">
+        </div>
+
+
+        
+
+        <!-- Textarea Question -->
+
+        <div class="question">
+            <p>34. Whats make you so sure that you waant to be with me?:</p>
+            <textarea id="sureforme" placeholder="write down why you so sure about me..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>35. What is 5 things you want your partner do to make you happy in a long distance relationship?:</p>
+            <textarea id="fivethings"
+                placeholder="Write your 5 things that you want your boyfriend/Husband do to make you happy..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>36. If one day i forgot everythging, then how you make me fall in love with you(You are stranger for
+                me)?</p>
+            <textarea id="forgoteverthing" placeholder="How you want me to fall again for you..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>37. How would you describe about us to your family, frined and your children:</p>
+            <textarea id="describeus" placeholder="How to tell your family, frined and child about us,..."></textarea>
+        </div>
+
+
+        <div class="question">
+            <p>38. What's the diffrent in me that you don't have in any of your ex boyfriend or friends:</p>
+            <textarea id="diffrentme" placeholder="write down the secret that only i can know..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>39. If we not together in future, would you tell about us to your next partner? if yes then how? if no
+                then why?</p>
+            <textarea id="nottogether" placeholder="How to tell about us to your next partner,..."></textarea>
+        </div>
+
+
+        <div class="question">
+            <p>40. What's the sexiest thing i have done that you still think about it:</p>
+            <textarea id="sexiestthing" placeholder="write down here without any hesitation..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>41. What will be your dream night with your husband:</p>
+            <textarea id="dreamNight" placeholder="Write your dream night..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>42. Tell me your dirty thought about me (Imagination/Dream) No-limits:</p>
+            <textarea id="dirtythought" placeholder="Write here without being shy..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>43. If i let you take complete control on me for one night, what will you do? (mo limits)</p>
+            <textarea id="nightcontrol" placeholder="write down in details without hesitation..."></textarea>
+        </div>
+
+        <div class="question">
+            <p>44. If you sit on my laps, what is one thing that you really want me to do and what is one thing you dont
+                want me to do?</p>
+            <textarea id="lapsitneeds"
+                placeholder="Tell 2 things that one you want and one you don't want i do with you..."></textarea>
+        </div>
+
+
+
+        <!-- File Upload Question -->
+        <div class="question">
+            <p>45. Upload my 3 picture that is your favorite photo:</p>
+            <input type="file" id="photo1" class="file-upload1">
+            <input type="file" id="photo2" class="file-upload2">
+            <input type="file" id="photo3" class="file-upload3">
+
+        </div>
+
+
+        <!-- Submit Button -->
+        <!-- <button class="submit-button" onclick="submitAnswers()">Submit Answers</button> -->
+        <button class="submit-button" onclick="validateAndSubmit()">Submit Answers</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init('W8ws_Q69iW_XJJRKt'); // Replace with your EmailJS User ID
+        })();
+    </script>
+
+    <!-- <script>
+        // Function to update the value displayed next to the slider
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+
+            slider.addEventListener('input', function () {
+                valueDisplay.textContent = slider.value;
+            });
+        }
+
+        // Update values for all sliders
+        updateSliderValue('looks', 'looks-value');
+        updateSliderValue('hair', 'hair-value');
+        updateSliderValue('Eyes', 'eyes-value');
+        updateSliderValue('dress', 'dress-value');
+        updateSliderValue('body', 'body-value');
+        updateSliderValue('behavior', 'behavior-value');
+        updateSliderValue('voice', 'voice-value');
+        updateSliderValue('salary', 'salary-value');
+
+
+        function submitAnswers() {
+            // Collect all user answers
+            const answers = {
+                yourName: document.getElementById('yourname').value,
+                myFullName: document.getElementById('myname').value,
+                birthdate: document.getElementById('birthdate').value,
+                looksRating: document.getElementById('looks').value,
+                hairRating: document.getElementById('hair').value,
+                eyesRating: document.getElementById('Eyes').value,
+                dressRating: document.getElementById('dress').value,
+                bodyRating: document.getElementById('body').value,
+                voiceRating: document.getElementById('voice').value,
+                behaviorRating: document.getElementById('behavior').value,
+                minSalary: document.getElementById('salary').value,
+                priority1: document.getElementById('priority1').value,
+                priority2: document.getElementById('priority2').value,
+                priority3: document.getElementById('priority3').value,
+                priority4: document.getElementById('priority4').value,
+                priority5: document.getElementById('priority5').value,
+                acceptMe: document.querySelector('input[name="acceptme"]:checked')?.value || 'Not selected',
+                acceptAfterCheating: document.querySelector('input[name="cheatonher"]:checked')?.value || 'Not selected',
+                cheatHusband: document.querySelector('input[name="cheathusb"]:checked')?.value || 'Not selected',
+                liveAloneOrCheater: document.querySelector('input[name="aloncheat"]:checked')?.value || 'Not selected',
+                pastOrFuture: document.querySelector('input[name="pastfuture"]:checked')?.value || 'Not selected',
+                bedroomChoice: document.querySelector('input[name="bedroom"]:checked')?.value || 'Not selected',
+                callYou: document.querySelector('input[name="callYou"]:checked')?.value || 'Not selected',
+                scareYou: document.querySelector('input[name="scareyou"]:checked')?.value || 'Not selected',
+                touchHer: document.querySelector('input[name="touchher"]:checked')?.value || 'Not selected',
+                whoAmI: document.querySelector('input[name="whoAm"]:checked')?.value || 'Not selected',
+                removeThings: document.querySelector('input[name="removethings"]:checked')?.value || 'Not selected',
+                personalityLikes: Array.from(document.querySelectorAll('input[name="personality"]:checked')).map(checkbox => checkbox.value).join(', '),
+                personalityShowMore: Array.from(document.querySelectorAll('input[name="personality2"]:checked')).map(checkbox => checkbox.value).join(', '),
+                readMind: Array.from(document.querySelectorAll('input[name="readmind"]:checked')).map(checkbox => checkbox.value).join(', '),
+                kissHer: Array.from(document.querySelectorAll('input[name="Kissher"]:checked')).map(checkbox => checkbox.value).join(', '),
+                missAboutMe: document.getElementById('missaboutme').value,
+                annoyingMe: document.getElementById('Annoyingme').value,
+                luckyYou: document.getElementById('luckyyou').value,
+                improve: document.getElementById('improve').value,
+                insecure: document.getElementById('insecure').value,
+                weirdestThings: document.getElementById('weiredestthings').value,
+                oneThing: document.getElementById('onethings').value,
+                neverChange: document.getElementById('neverchnage').value,
+                bodyPart: document.getElementById('bodypart').value,
+                firstKiss: document.getElementById('firstkiss').value,
+                afraidToAsk: document.getElementById('afraidtoask').value,
+                thingsWant: document.getElementById('thingswant').value,
+                sureForMe: document.getElementById('sureforme').value,
+                fiveThings: document.getElementById('fivethings').value,
+                forgotEverything: document.getElementById('forgoteverthing').value,
+                describeUs: document.getElementById('describeus').value,
+                differentMe: document.getElementById('diffrentme').value,
+                notTogether: document.getElementById('nottogether').value,
+                sexiestThing: document.getElementById('sexiestthing').value,
+                dreamNight: document.getElementById('dreamNight').value,
+                dirtyThought: document.getElementById('dirtythought').value,
+                nightControl: document.getElementById('nightcontrol').value,
+                lapSitNeeds: document.getElementById('lapsitneeds').value,
+                photo1: document.getElementById('photo1').files[0]?.name || 'No file uploaded',
+                photo2: document.getElementById('photo2').files[0]?.name || 'No file uploaded',
+                photo3: document.getElementById('photo3').files[0]?.name || 'No file uploaded',
+            };
+
+            // Send the data via EmailJS
+            emailjs.send('service_iqhbeop', 'template_cymz3pp', answers)
+                .then(() => {
+                    alert('Thank you for completing the questionnaire! Your answers have been sent.');
+                })
+                .catch((error) => {
+                    console.error('Error sending email: ', error);
+                });
+        }
+
+    </script> -->
+
+    <script>
+        // Function to update the value displayed next to the slider
+        function updateSliderValue(sliderId, valueId) {
+            const slider = document.getElementById(sliderId);
+            const valueDisplay = document.getElementById(valueId);
+
+            slider.addEventListener('input', function () {
+                valueDisplay.textContent = slider.value;
+            });
+        }
+
+        // Update values for all sliders
+        updateSliderValue('looks', 'looks-value');
+        updateSliderValue('hair', 'hair-value');
+        updateSliderValue('Eyes', 'eyes-value');
+        updateSliderValue('dress', 'dress-value');
+        updateSliderValue('body', 'body-value');
+        updateSliderValue('behavior', 'behavior-value');
+        updateSliderValue('voice', 'voice-value');
+        updateSliderValue('salary', 'salary-value');
+
+        // Function to validate the form
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[type="text"], input[type="date"], input[type="radio"], input[type="checkbox"], select, textarea');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (input.type === 'radio' || input.type === 'checkbox') {
+                    const groupName = input.name;
+                    const isChecked = document.querySelector(`input[name="${groupName}"]:checked`);
+                    if (!isChecked) {
+                        isValid = false;
+                    }
+                } else if (input.type === 'text' || input.type === 'date' || input.tagName === 'SELECT' || input.tagName === 'TEXTAREA') {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                    }
+                }
+            });
+
+            return isValid;
+        }
+
+        // Function to submit the form
+        function submitAnswers() {
+            // Collect all user answers
+            const answers = {
+                yourName: document.getElementById('yourname').value,
+                myFullName: document.getElementById('myname').value,
+                birthdate: document.getElementById('birthdate').value,
+                looksRating: document.getElementById('looks').value,
+                hairRating: document.getElementById('hair').value,
+                eyesRating: document.getElementById('Eyes').value,
+                dressRating: document.getElementById('dress').value,
+                bodyRating: document.getElementById('body').value,
+                voiceRating: document.getElementById('voice').value,
+                behaviorRating: document.getElementById('behavior').value,
+                minSalary: document.getElementById('salary').value,
+                priority1: document.getElementById('priority1').value,
+                priority2: document.getElementById('priority2').value,
+                priority3: document.getElementById('priority3').value,
+                priority4: document.getElementById('priority4').value,
+                priority5: document.getElementById('priority5').value,
+                acceptMe: document.querySelector('input[name="acceptme"]:checked')?.value || 'Not selected',
+                acceptAfterCheating: document.querySelector('input[name="cheatonher"]:checked')?.value || 'Not selected',
+                cheatHusband: document.querySelector('input[name="cheathusb"]:checked')?.value || 'Not selected',
+                liveAloneOrCheater: document.querySelector('input[name="aloncheat"]:checked')?.value || 'Not selected',
+                pastOrFuture: document.querySelector('input[name="pastfuture"]:checked')?.value || 'Not selected',
+                bedroomChoice: document.querySelector('input[name="bedroom"]:checked')?.value || 'Not selected',
+                callYou: document.querySelector('input[name="callYou"]:checked')?.value || 'Not selected',
+                scareYou: document.querySelector('input[name="scareyou"]:checked')?.value || 'Not selected',
+                touchHer: document.querySelector('input[name="touchher"]:checked')?.value || 'Not selected',
+                whoAmI: document.querySelector('input[name="whoAm"]:checked')?.value || 'Not selected',
+                removeThings: document.querySelector('input[name="removethings"]:checked')?.value || 'Not selected',
+                personalityLikes: Array.from(document.querySelectorAll('input[name="personality"]:checked')).map(checkbox => checkbox.value).join(', '),
+                personalityShowMore: Array.from(document.querySelectorAll('input[name="personality2"]:checked')).map(checkbox => checkbox.value).join(', '),
+                readMind: Array.from(document.querySelectorAll('input[name="readmind"]:checked')).map(checkbox => checkbox.value).join(', '),
+                kissHer: Array.from(document.querySelectorAll('input[name="Kissher"]:checked')).map(checkbox => checkbox.value).join(', '),
+                missAboutMe: document.getElementById('missaboutme').value,
+                annoyingMe: document.getElementById('Annoyingme').value,
+                luckyYou: document.getElementById('luckyyou').value,
+                improve: document.getElementById('improve').value,
+                insecure: document.getElementById('insecure').value,
+                weirdestThings: document.getElementById('weiredestthings').value,
+                oneThing: document.getElementById('onethings').value,
+                neverChange: document.getElementById('neverchnage').value,
+                bodyPart: document.getElementById('bodypart').value,
+                firstKiss: document.getElementById('firstkiss').value,
+                afraidToAsk: document.getElementById('afraidtoask').value,
+                thingsWant: document.getElementById('thingswant').value,
+                sureForMe: document.getElementById('sureforme').value,
+                fiveThings: document.getElementById('fivethings').value,
+                forgotEverything: document.getElementById('forgoteverthing').value,
+                describeUs: document.getElementById('describeus').value,
+                differentMe: document.getElementById('diffrentme').value,
+                notTogether: document.getElementById('nottogether').value,
+                sexiestThing: document.getElementById('sexiestthing').value,
+                dreamNight: document.getElementById('dreamNight').value,
+                dirtyThought: document.getElementById('dirtythought').value,
+                nightControl: document.getElementById('nightcontrol').value,
+                lapSitNeeds: document.getElementById('lapsitneeds').value,
+                photo1: document.getElementById('photo1').files[0]?.name || 'No file uploaded',
+                photo2: document.getElementById('photo2').files[0]?.name || 'No file uploaded',
+                photo3: document.getElementById('photo3').files[0]?.name || 'No file uploaded',
+            };
+
+            // Send the data via EmailJS
+            emailjs.send('service_iqhbeop', 'template_cymz3pp', answers)
+                .then(() => {
+                    alert('Thank you for completing the questionnaire! Your answers have been sent.');
+                    // Redirect to a new HTML file after submission
+                    // window.location.href = 'thankyou.html'; // Replace with your desired HTML file
+                })
+                .catch((error) => {
+                    console.error('Error sending email: ', error);
+                });
+        }
+
+        // Function to validate and submit the form
+        function validateAndSubmit() {
+            if (validateForm()) {
+                submitAnswers();
+            } else {
+                alert('Please fill all the details before submitting the form.');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
