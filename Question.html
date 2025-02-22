@@ -774,101 +774,7 @@
         })();
     </script>
 
-    <!-- <script>
-        // Function to update the value displayed next to the slider
-        function updateSliderValue(sliderId, valueId) {
-            const slider = document.getElementById(sliderId);
-            const valueDisplay = document.getElementById(valueId);
-
-            slider.addEventListener('input', function () {
-                valueDisplay.textContent = slider.value;
-            });
-        }
-
-        // Update values for all sliders
-        updateSliderValue('looks', 'looks-value');
-        updateSliderValue('hair', 'hair-value');
-        updateSliderValue('Eyes', 'eyes-value');
-        updateSliderValue('dress', 'dress-value');
-        updateSliderValue('body', 'body-value');
-        updateSliderValue('behavior', 'behavior-value');
-        updateSliderValue('voice', 'voice-value');
-        updateSliderValue('salary', 'salary-value');
-
-
-        function submitAnswers() {
-            // Collect all user answers
-            const answers = {
-                yourName: document.getElementById('yourname').value,
-                myFullName: document.getElementById('myname').value,
-                birthdate: document.getElementById('birthdate').value,
-                looksRating: document.getElementById('looks').value,
-                hairRating: document.getElementById('hair').value,
-                eyesRating: document.getElementById('Eyes').value,
-                dressRating: document.getElementById('dress').value,
-                bodyRating: document.getElementById('body').value,
-                voiceRating: document.getElementById('voice').value,
-                behaviorRating: document.getElementById('behavior').value,
-                minSalary: document.getElementById('salary').value,
-                priority1: document.getElementById('priority1').value,
-                priority2: document.getElementById('priority2').value,
-                priority3: document.getElementById('priority3').value,
-                priority4: document.getElementById('priority4').value,
-                priority5: document.getElementById('priority5').value,
-                acceptMe: document.querySelector('input[name="acceptme"]:checked')?.value || 'Not selected',
-                acceptAfterCheating: document.querySelector('input[name="cheatonher"]:checked')?.value || 'Not selected',
-                cheatHusband: document.querySelector('input[name="cheathusb"]:checked')?.value || 'Not selected',
-                liveAloneOrCheater: document.querySelector('input[name="aloncheat"]:checked')?.value || 'Not selected',
-                pastOrFuture: document.querySelector('input[name="pastfuture"]:checked')?.value || 'Not selected',
-                bedroomChoice: document.querySelector('input[name="bedroom"]:checked')?.value || 'Not selected',
-                callYou: document.querySelector('input[name="callYou"]:checked')?.value || 'Not selected',
-                scareYou: document.querySelector('input[name="scareyou"]:checked')?.value || 'Not selected',
-                touchHer: document.querySelector('input[name="touchher"]:checked')?.value || 'Not selected',
-                whoAmI: document.querySelector('input[name="whoAm"]:checked')?.value || 'Not selected',
-                removeThings: document.querySelector('input[name="removethings"]:checked')?.value || 'Not selected',
-                personalityLikes: Array.from(document.querySelectorAll('input[name="personality"]:checked')).map(checkbox => checkbox.value).join(', '),
-                personalityShowMore: Array.from(document.querySelectorAll('input[name="personality2"]:checked')).map(checkbox => checkbox.value).join(', '),
-                readMind: Array.from(document.querySelectorAll('input[name="readmind"]:checked')).map(checkbox => checkbox.value).join(', '),
-                kissHer: Array.from(document.querySelectorAll('input[name="Kissher"]:checked')).map(checkbox => checkbox.value).join(', '),
-                missAboutMe: document.getElementById('missaboutme').value,
-                annoyingMe: document.getElementById('Annoyingme').value,
-                luckyYou: document.getElementById('luckyyou').value,
-                improve: document.getElementById('improve').value,
-                insecure: document.getElementById('insecure').value,
-                weirdestThings: document.getElementById('weiredestthings').value,
-                oneThing: document.getElementById('onethings').value,
-                neverChange: document.getElementById('neverchnage').value,
-                bodyPart: document.getElementById('bodypart').value,
-                firstKiss: document.getElementById('firstkiss').value,
-                afraidToAsk: document.getElementById('afraidtoask').value,
-                thingsWant: document.getElementById('thingswant').value,
-                sureForMe: document.getElementById('sureforme').value,
-                fiveThings: document.getElementById('fivethings').value,
-                forgotEverything: document.getElementById('forgoteverthing').value,
-                describeUs: document.getElementById('describeus').value,
-                differentMe: document.getElementById('diffrentme').value,
-                notTogether: document.getElementById('nottogether').value,
-                sexiestThing: document.getElementById('sexiestthing').value,
-                dreamNight: document.getElementById('dreamNight').value,
-                dirtyThought: document.getElementById('dirtythought').value,
-                nightControl: document.getElementById('nightcontrol').value,
-                lapSitNeeds: document.getElementById('lapsitneeds').value,
-                photo1: document.getElementById('photo1').files[0]?.name || 'No file uploaded',
-                photo2: document.getElementById('photo2').files[0]?.name || 'No file uploaded',
-                photo3: document.getElementById('photo3').files[0]?.name || 'No file uploaded',
-            };
-
-            // Send the data via EmailJS
-            emailjs.send('service_iqhbeop', 'template_cymz3pp', answers)
-                .then(() => {
-                    alert('Thank you for completing the questionnaire! Your answers have been sent.');
-                })
-                .catch((error) => {
-                    console.error('Error sending email: ', error);
-                });
-        }
-
-    </script> -->
+    
 
     <script>
         // Function to update the value displayed next to the slider
@@ -981,7 +887,7 @@
                 .then(() => {
                     alert('Thank you for completing the questionnaire! Your answers have been sent.');
                     // Redirect to a new HTML file after submission
-                    // window.location.href = 'thankyou.html'; // Replace with your desired HTML file
+                    window.location.href = 'lolap.html'; // Replace with your desired HTML file
                 })
                 .catch((error) => {
                     console.error('Error sending email: ', error);
