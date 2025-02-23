@@ -349,10 +349,10 @@
 
         // Click effect for touch devices
         if (window.matchMedia("(hover: none)").matches) {
-            const card = document.querySelector('.card');
+            const back = document.querySelector('.back');
             let isFlipped = false;
 
-            card.addEventListener('click', function () {
+            back.addEventListener('click', function () {
                 if (!isFlipped) {
                     flipCard();
                     isFlipped = true;
