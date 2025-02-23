@@ -340,6 +340,9 @@
             back.style.transform = 'perspective(800px) rotateY(0deg)';
         }
 
+        // Track whether the card is flipped
+        let isFlipped = false;
+
         // Hover effect for devices that support hover
         if (window.matchMedia("(hover: hover)").matches) {
             const card = document.querySelector('.card');
@@ -349,14 +352,21 @@
 
         // Click effect for touch devices
         if (window.matchMedia("(hover: none)").matches) {
-            const back = document.querySelector('.back');
-            let isFlipped = false;
+            const card = document.querySelector('.card');
+            const body = document.querySelector('body');
 
-            back.addEventListener('click', function () {
+            // Flip the card on click
+            card.addEventListener('click', function (event) {
+                event.stopPropagation(); // Prevent the click from propagating to the body
                 if (!isFlipped) {
                     flipCard();
                     isFlipped = true;
-                } else {
+                }
+            });
+
+            // Unflip the card when clicking outside the card
+            body.addEventListener('click', function (event) {
+                if (isFlipped && !card.contains(event.target)) {
                     unflipCard();
                     isFlipped = false;
                 }
