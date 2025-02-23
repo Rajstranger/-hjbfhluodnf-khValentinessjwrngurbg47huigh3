@@ -322,6 +322,48 @@
     </script>
 
     <script>
+        // Function to flip the card
+        function flipCard() {
+            const front = document.querySelector('.front');
+            const back = document.querySelector('.back');
+
+            front.style.transform = 'perspective(800px) rotateY(-170deg)';
+            back.style.transform = 'perspective(800px) rotateY(-170deg)';
+        }
+
+        // Function to unflip the card
+        function unflipCard() {
+            const front = document.querySelector('.front');
+            const back = document.querySelector('.back');
+
+            front.style.transform = 'perspective(800px) rotateY(0deg)';
+            back.style.transform = 'perspective(800px) rotateY(0deg)';
+        }
+
+        // Hover effect for devices that support hover
+        if (window.matchMedia("(hover: hover)").matches) {
+            const card = document.querySelector('.card');
+            card.addEventListener('mouseenter', flipCard);
+            card.addEventListener('mouseleave', unflipCard);
+        }
+
+        // Click effect for touch devices
+        if (window.matchMedia("(hover: none)").matches) {
+            const card = document.querySelector('.card');
+            let isFlipped = false;
+
+            card.addEventListener('click', function () {
+                if (!isFlipped) {
+                    flipCard();
+                    isFlipped = true;
+                } else {
+                    unflipCard();
+                    isFlipped = false;
+                }
+            });
+        }
+
+        // Submit button functionality
         document.getElementById('submitButton').addEventListener('click', function (event) {
             event.preventDefault(); // Prevent the form from submitting
 
